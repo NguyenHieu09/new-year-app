@@ -1,167 +1,81 @@
-// import React, { useState, useEffect } from 'react';
-// import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
-// import { AppDispatch, RootState } from '../../redux-toolkit/store';
-// import { login } from '../../redux-toolkit/slice/UserSlice';
-// import { useDispatch, useSelector } from 'react-redux';
-
-// const SignInScreen = () => {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-
-//     const dispatch = useDispatch<AppDispatch>();
-//     const { user, status, error } = useSelector((state: RootState) => state.auth);
-
-//     const handleSignIn = () => {
-//         if (email && password) {
-//             dispatch(login({ email, password }))
-//                 .unwrap()
-//                 .then(() => {
-//                     console.log('Sign in successful');
-//                 })
-//                 .catch((err) => {
-//                     console.error('Sign in error:', err);
-//                 });
-//         } else {
-//             console.log("Please fill in both fields.");
-//         }
-//     };
-
-//     useEffect(() => {
-//         if (error) {
-//             console.error('Error:', error);
-//         }
-//     }, [error]);
-
-//     return (
-//         <View style={styles.container}>
-//             <Text style={styles.header}>Sign In</Text>
-
-//             <TextInput
-//                 style={styles.input}
-//                 placeholder="Email"
-//                 value={email}
-//                 onChangeText={setEmail}
-//                 keyboardType="email-address"
-//             />
-//             <TextInput
-//                 style={styles.input}
-//                 placeholder="Password"
-//                 value={password}
-//                 onChangeText={setPassword}
-//                 secureTextEntry
-//             />
-
-//             <Button title="Sign In" onPress={handleSignIn} />
-
-//             {status === 'loading' && <Text style={styles.loadingText}>Signing in...</Text>}
-//             {status === 'failed' && <Text style={styles.errorText}>{error}</Text>}
-//         </View>
-//     );
-// };
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         padding: 16,
-//         justifyContent: 'center',
-//     },
-//     header: {
-//         fontSize: 24,
-//         fontWeight: 'bold',
-//         marginBottom: 16,
-//         textAlign: 'center',
-//     },
-//     input: {
-//         borderWidth: 1,
-//         borderColor: '#ccc',
-//         padding: 12,
-//         borderRadius: 8,
-//         marginBottom: 16,
-//     },
-//     loadingText: {
-//         marginTop: 8,
-//         color: 'blue',
-//         textAlign: 'center',
-//     },
-//     errorText: {
-//         marginTop: 8,
-//         color: 'red',
-//         textAlign: 'center',
-//     },
-// });
-
-// export default SignInScreen;
-
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { AppDispatch, RootState } from '../../redux-toolkit/store';
 import { login } from '../../redux-toolkit/slice/UserSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '@/src/type/RootStackParamList';
+
+const backgroundImage = require('../../../assets/image/dn-dk.png');
 
 const SignInScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const dispatch = useDispatch<AppDispatch>();
-    const { user, status, error } = useSelector((state: RootState) => state.auth);
+    const { status, error } = useSelector((state: RootState) => state.auth);
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
     const handleSignIn = () => {
         if (email && password) {
             dispatch(login({ email, password }))
                 .unwrap()
                 .then(() => {
-                    console.log('Sign in successful');
+                    console.log('Đăng nhập thành công');
+                    navigation.navigate('Home');
                 })
                 .catch((err) => {
-                    console.error('Sign in error:', err);
+                    console.error('Lỗi đăng nhập:', err);
                 });
         } else {
-            console.log("Please fill in both fields.");
+            console.log("Vui lòng điền đầy đủ thông tin.");
         }
     };
 
     useEffect(() => {
         if (error) {
-            console.error('Error:', error);
+            console.error('Lỗi:', error);
         }
     }, [error]);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Sign In</Text>
+        <ImageBackground source={backgroundImage} style={styles.background} resizeMode="cover">
+            <View style={styles.container}>
+                <Text style={styles.header}>Đăng Nhập</Text>
 
-            {user ? (
-                <View style={styles.userInfo}>
-                    <Text style={styles.userText}>Welcome, {user.fullName}</Text>
-                    <Text style={styles.userText}>Email: {user.email}</Text>
-                </View>
-            ) : (
-                <>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Email"
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Password"
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                    />
-                    <Button title="Sign In" onPress={handleSignIn} />
-                </>
-            )}
+                <TextInput
+                    style={styles.input}
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={setEmail}
+                    keyboardType="email-address"
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Mật khẩu"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry
+                />
+                <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+                    <Text style={styles.buttonText}>
+                        {status === 'loading' ? 'Đang đăng nhập...' : 'Đăng Nhập'}
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+                    <Text style={styles.linkText}>Bạn chưa có tài khoản? Đăng Ký</Text>
+                </TouchableOpacity>
 
-            {status === 'loading' && <Text style={styles.loadingText}>Signing in...</Text>}
-            {status === 'failed' && <Text style={styles.errorText}>{error}</Text>}
-        </View>
+                {status === 'failed' && <Text style={styles.errorText}>{error}</Text>}
+            </View>
+        </ImageBackground>
     );
 };
 
 const styles = StyleSheet.create({
+    background: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         padding: 16,
@@ -179,23 +93,30 @@ const styles = StyleSheet.create({
         padding: 12,
         borderRadius: 8,
         marginBottom: 16,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
     },
-    loadingText: {
-        marginTop: 8,
-        color: 'blue',
+    button: {
+        backgroundColor: '#C2030B',
+        padding: 12,
+        borderRadius: 8,
+        alignItems: 'center',
+        marginBottom: 16,
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    linkText: {
+        color: '#C2030B',
+        fontSize: 16,
         textAlign: 'center',
+        textDecorationLine: 'underline',
     },
     errorText: {
         marginTop: 8,
         color: 'red',
         textAlign: 'center',
-    },
-    userInfo: {
-        alignItems: 'center',
-    },
-    userText: {
-        fontSize: 18,
-        marginBottom: 8,
     },
 });
 
