@@ -4,4 +4,5 @@ export type RootStackParamList = {
     Home: undefined;
     BottomNavigation: undefined;
     GoldenScreen: undefined;
+    CompetitionScreen: undefined;
 };

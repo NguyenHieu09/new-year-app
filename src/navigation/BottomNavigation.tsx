@@ -7,6 +7,7 @@ import SignUpScreen from '../screens/auth/SignUp';
 import { Image, Text } from 'react-native';
 import GoldenScreen from '../screens/golden/Golden';
 import { getMultiFactorResolver } from 'firebase/auth';
+import CompetitionScreen from '../screens/competition/Competition';
 
 const Tab = createBottomTabNavigator();
 
@@ -51,8 +52,8 @@ const BottomNavigation = () => {
             })}
         >
             <Tab.Screen name="Lắc lộc vàng" component={GoldenScreen} options={{ headerShown: false }} />
-            <Tab.Screen name="Lì xì vàng" component={SignInScreen} />
-            <Tab.Screen name="Kho lộc" component={SignUpScreen} />
+            <Tab.Screen name="Lì xì vàng" component={CompetitionScreen} options={{ headerShown: false }} />
+            <Tab.Screen name="Kho lộc" component={SignUpScreen} options={{ headerShown: false }} />
         </Tab.Navigator>
     );
 
