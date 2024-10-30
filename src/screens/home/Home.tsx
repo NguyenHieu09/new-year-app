@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { RootStackParamList } from '@/src/type/RootStackParamList';
+import AttendanceModal from '@/src/components/modal/attendance';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomButton from '@/src/components/ui/CustomButton';
 
 const backgroundImage = require('../../../assets/image/dn-dk.png');
 const centerImage = require('../../../assets/image/laclocvang.png');
@@ -10,38 +13,42 @@ const frameImage = require('../../../assets/image/trangchu.png');
 
 const HomeScreen = () => {
     const [opacity, setOpacity] = useState(1);
+    const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
     return (
-        <ImageBackground source={backgroundImage} style={styles.background} resizeMode="cover">
-            <View style={styles.container}>
-                <Image source={centerImage} style={styles.centerImage} />
-                <ImageBackground source={frameImage} style={styles.frame} imageStyle={styles.frameImage}>
-                    <Text style={styles.frameText}>
-                        Lắc chắt chiu từng lượt{'\n'}
-                        Nhận ngay 1 phần quà{'\n'}
-                        Lắc tới bến chục lượt{'\n'}
-                        Nhận một lúc 10 phần quà!
-                    </Text>
-                </ImageBackground>
-                <TouchableOpacity
-                    onPressIn={() => setOpacity(0.8)}  // Giảm opacity khi nhấn
-                    onPressOut={() => setOpacity(1)}  // Khôi phục opacity khi thả
-                    onPress={() => navigation.navigate('SignIn')}
-                >
-                    <LinearGradient
-                        colors={['#fff700', '#ffcc00', '#ff9900']}
-                        style={[styles.button, { opacity }]}
-                    >
-                        <Text style={styles.buttonText}>Tham gia ngay</Text>
-                    </LinearGradient>
-                </TouchableOpacity>
-            </View>
-        </ImageBackground>
+        <SafeAreaView style={styles.safeArea}>
+            <ImageBackground source={backgroundImage} style={styles.background} resizeMode="cover">
+                <View style={styles.container}>
+                    <Image source={centerImage} style={styles.centerImage} />
+                    <ImageBackground source={frameImage} style={styles.frame} imageStyle={styles.frameImage}>
+                        <Text style={styles.frameText}>
+                            Lắc chắt chiu từng lượt{'\n'}
+                            Nhận ngay 1 phần quà{'\n'}
+                            Lắc tới bến chục lượt{'\n'}
+                            Nhận một lúc 10 phần quà!
+                        </Text>
+                    </ImageBackground>
+
+                    <CustomButton
+                        title="Tham gia ngay"
+                        onPress={() => setModalVisible(true)}
+                        style={styles.button}
+                    />
+                    <AttendanceModal
+                        visible={modalVisible}
+                        onClose={() => setModalVisible(false)}
+                    />
+                </View>
+            </ImageBackground>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+    },
     background: {
         flex: 1,
     },
