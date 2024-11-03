@@ -5,4 +5,5 @@ export type RootStackParamList = {
     BottomNavigation: undefined;
     GoldenScreen: undefined;
     CompetitionScreen: undefined;
+    StockScreen: undefined;
 };
