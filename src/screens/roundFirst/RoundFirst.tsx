@@ -30,7 +30,7 @@ const RoundFirstScreen = () => {
                         {/* <CustomText style={styles.number}>Bạn đang có 11 lì xì</CustomText> */}
                         <CustomButton
                             title="Thánh lì xì"
-                            onPress={() => setModalVisible(true)}
+                            onPress={() => navigation.navigate('EnvelopeScreen')}
                             style={styles.button}
                         />
                         <CustomButton

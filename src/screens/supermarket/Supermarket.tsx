@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'red',
         width: 300,
         height: 220,
-        resizeMode: 'contain',
+
         justifyContent: 'center',
         alignItems: 'center',
     },
