@@ -66,7 +66,7 @@ const CompetitionScreen = () => {
                                 <Image source={vong2} style={styles.image} />
                                 <Text style={{ textAlign: 'center', color: '#FFE933', fontFamily: 'Signika-SemiBold' }}>Tết tranh {`\n`} tài</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={[styles.round, { position: 'absolute', right: 65, bottom: 20 }]}>
+                            <TouchableOpacity style={[styles.round, { position: 'absolute', right: 65, bottom: 20 }]} onPress={() => navigation.navigate('RoundFirstScreen')}>
                                 <Image source={vong1} style={styles.image} />
                                 <Text style={{ textAlign: 'center', color: '#FFE933', fontFamily: 'Signika-Bold' }}>
                                     Đáp nhanh {`\n`}

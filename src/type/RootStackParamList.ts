@@ -6,4 +6,6 @@ export type RootStackParamList = {
     GoldenScreen: undefined;
     CompetitionScreen: undefined;
     StockScreen: undefined;
+    RoundFirstScreen: undefined;
+    SupermarketScreen: undefined;
 };
