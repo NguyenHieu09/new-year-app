@@ -9,4 +9,5 @@ export type RootStackParamList = {
     RoundFirstScreen: undefined;
     SupermarketScreen: undefined;
     EnvelopeScreen: undefined;
+    AnswerQuestionScreen: undefined;
 };

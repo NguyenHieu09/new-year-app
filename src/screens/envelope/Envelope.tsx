@@ -1,4 +1,6 @@
 import CustomButton from '@/src/components/ui/CustomButton';
+import { RootStackParamList } from '@/src/type/RootStackParamList';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
@@ -9,6 +11,7 @@ const banner = require('../../../assets/image/banner.png');
 
 
 const EnvelopeScreen = () => {
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     return (
         <SafeAreaView style={styles.safeArea}>
             <LinearGradient
@@ -20,7 +23,7 @@ const EnvelopeScreen = () => {
                 <Text style={styles.header}>THÁNH LÌ XÌ</Text>
                 <ImageBackground source={backgroundImage} style={styles.background} imageStyle={styles.frameImage}>
                     <View style={styles.container}>
-                        <Text style={[styles.text, { margin: 15, }]}>Đáp nhanh tranh lì xì</Text>
+                        <Text style={[styles.text, { margin: 30, }]}>Đáp nhanh tranh lì xì</Text>
                         <View style={{ paddingVertical: 10, justifyContent: 'center', backgroundColor: 'rgba(200, 180, 130, 0.5)' }}>
                             <View style={{ marginHorizontal: 26 }}>
                                 <Text style={[styles.text, { fontSize: 18 }]}>Nhiệm vụ</Text>
@@ -31,8 +34,8 @@ const EnvelopeScreen = () => {
                         </View>
 
                         <Image source={banner} style={styles.banner} />
-                        <CustomButton title='Tìm đối thủ' style={styles.button} />
-                        <View style={{ width: '90%', backgroundColor: '#b0050b', borderWidth: 2, borderColor: '#fff613', borderRadius: 10 }}>
+                        <CustomButton title='Tìm đối thủ' style={styles.button} onPress={() => navigation.navigate('AnswerQuestionScreen')} />
+                        <View style={{ width: '90%', backgroundColor: '#b0050b', borderWidth: 2, borderColor: '#fff613', borderRadius: 10, bottom: 0, }}>
                             <Text style={styles.message}>
                                 Lưu ý: Người chơi chiến thắng sẽ nhận được{' '}
                                 <Text style={[styles.highlightedNumber, { fontWeight: '700' }]}> +1 li xì</Text>
@@ -88,6 +91,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     banner: {
+
         width: 260,
         // height: 500,
         resizeMode: 'contain'

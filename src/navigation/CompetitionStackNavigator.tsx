@@ -4,6 +4,7 @@ import CompetitionScreen from '../screens/competition/Competition';
 import RoundFirstScreen from '../screens/roundFirst/RoundFirst';
 import SupermarketScreen from '../screens/supermarket/Supermarket';
 import EnvelopeScreen from '../screens/envelope/Envelope';
+import AnswerQuestionScreen from '../screens/answerQuestion/AnswerQuestion';
 
 const CompetitionStack = createStackNavigator();
 
@@ -14,7 +15,8 @@ const CompetitionStackNavigator = () => {
             <CompetitionStack.Screen name="RoundFirstScreen" component={RoundFirstScreen} />
             <CompetitionStack.Screen name="SupermarketScreen" component={SupermarketScreen} />
             <CompetitionStack.Screen name="EnvelopeScreen" component={EnvelopeScreen} />
-            {/* Thêm các màn hình khác vào đây */}
+            <CompetitionStack.Screen name="AnswerQuestionScreen" component={AnswerQuestionScreen} />
+
         </CompetitionStack.Navigator>
     );
 };
