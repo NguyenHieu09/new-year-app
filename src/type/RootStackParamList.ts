@@ -10,4 +10,7 @@ export type RootStackParamList = {
     SupermarketScreen: undefined;
     EnvelopeScreen: undefined;
     AnswerQuestionScreen: undefined;
+    RoundSecondScreen: undefined;
+    ScrewScreen: { type: string };
+    StartGameScreen: undefined;
 };

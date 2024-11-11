@@ -62,7 +62,7 @@ const CompetitionScreen = () => {
                                 <Image source={chungket} style={styles.imageRound3} />
                                 <Text style={{ textAlign: 'center', color: '#FFE933', fontFamily: 'Signika-SemiBold' }}>15-12-2021</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={[styles.round, { position: 'absolute', left: 65 }]}>
+                            <TouchableOpacity style={[styles.round, { position: 'absolute', left: 65 }]} onPress={() => navigation.navigate('RoundSecondScreen')}>
                                 <Image source={vong2} style={styles.image} />
                                 <Text style={{ textAlign: 'center', color: '#FFE933', fontFamily: 'Signika-SemiBold' }}>Tết tranh {`\n`} tài</Text>
                             </TouchableOpacity>

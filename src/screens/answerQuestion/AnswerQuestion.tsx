@@ -23,9 +23,9 @@ const AnswerQuestionScreen = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTimer((prev) => prev + 1); // Increment timer every second
+            setTimer((prev) => prev + 1);
         }, 1000);
-        return () => clearInterval(interval); // Clear interval on component unmount
+        return () => clearInterval(interval);
     }, []);
 
     // Format timer display as mm:ss
