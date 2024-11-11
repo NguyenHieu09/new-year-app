@@ -1,10 +1,12 @@
 import CustomButton from '@/src/components/ui/CustomButton';
+import { RootState } from '@/src/redux-toolkit/store';
 import { RootStackParamList } from '@/src/type/RootStackParamList';
 import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 
 // const backgroundImage1 = require('../../../assets/image/bannerVit.png');
 
@@ -34,7 +36,10 @@ const StartGameScreen = () => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     // const route = useRoute<RouteProp<RootStackParamList, 'ScrewScreen'>>();
     // const { type } = route.params;
+    const me = useSelector((state: RootState) => state.auth.user);
+
     const [timer, setTimer] = useState(0);
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -73,7 +78,7 @@ const StartGameScreen = () => {
                             textShadowOffset: { width: 0.75, height: 0.75 },
                             textShadowRadius: 0.5,
                             textAlign: 'center',
-                        }}>Nguyễn Thị Trung Hiếu</Text>
+                        }}>{me?.fullName}</Text>
                     </View>
                     <View style={styles.user}>
                         <Image source={otherUser} style={styles.image} />

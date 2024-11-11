@@ -89,11 +89,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
     },
+    // button: {
+    //     padding: 8,
+    //     borderRadius: 20,
+    //     paddingHorizontal: 20,
+    //     marginTop: 115
+    // },
     button: {
-        padding: 8,
         borderRadius: 20,
-        paddingHorizontal: 20,
-        marginTop: 115
+        width: 170,
+        height: 45,
+        justifyContent: 'center',
+        marginTop: 115,
     },
     buttonText: {
         color: '#cc0000',

@@ -72,10 +72,17 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginTop: 20,
     },
+    // button: {
+    //     borderRadius: 20,
+    //     marginTop: 5,
+    //     width: 150
+    // },
     button: {
         borderRadius: 20,
         marginTop: 5,
-        width: 150
+        width: 150,
+        height: 38,
+        justifyContent: 'center',
     },
     buttonText: {
         color: '#cc0000',

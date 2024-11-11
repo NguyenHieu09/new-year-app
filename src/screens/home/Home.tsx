@@ -63,10 +63,17 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 16,
     },
+    // button: {
+    //     padding: 8,
+    //     borderRadius: 20,
+    //     paddingHorizontal: 20
+    // },
     button: {
-        padding: 8,
         borderRadius: 20,
-        paddingHorizontal: 20
+        marginTop: 10,
+        width: 200,
+        height: 50,
+        justifyContent: 'center',
     },
     buttonText: {
         color: '#cc0000',
