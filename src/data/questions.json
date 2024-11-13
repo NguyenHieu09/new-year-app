@@ -1,0 +1,152 @@
+[
+    {
+        "question": "Tết Nguyên Đán là ngày đầu năm âm lịch của người Việt, thường rơi vào tháng mấy?",
+        "options": [
+            "Tháng 12",
+            "Tháng 1",
+            "Tháng 2",
+            "Tháng 3"
+        ],
+        "answer": "Tháng 1"
+    },
+    {
+        "question": "Mâm cỗ ngày Tết không thể thiếu món ăn nào?",
+        "options": [
+            "Gà luộc",
+            "Bánh chưng",
+            "Cá kho",
+            "Nem rán"
+        ],
+        "answer": "Bánh chưng"
+    },
+    {
+        "question": "Bánh chưng, bánh tét là những món đặc sản của dịp Tết của người dân nào?",
+        "options": [
+            "Người miền Trung",
+            "Người miền Bắc",
+            "Người miền Nam",
+            "Người miền Tây"
+        ],
+        "answer": "Người miền Bắc"
+    },
+    {
+        "question": "Ngày mùng 1 Tết, người Việt thường đi đâu để cầu bình an và may mắn?",
+        "options": [
+            "Đền chùa",
+            "Nhà thờ",
+            "Bãi biển",
+            "Công viên"
+        ],
+        "answer": "Đền chùa"
+    },
+    {
+        "question": "Câu chúc Tết phổ biến nhất mà người Việt hay dùng là gì?",
+        "options": [
+            "Chúc mừng năm mới",
+            "Chúc bạn bình an",
+            "Chúc bạn thành công",
+            "Chúc bạn hạnh phúc"
+        ],
+        "answer": "Chúc mừng năm mới"
+    },
+    {
+        "question": "Màu sắc nào thường được sử dụng nhiều trong trang trí Tết ở Việt Nam?",
+        "options": [
+            "Đỏ",
+            "Vàng",
+            "Xanh lá cây",
+            "Trắng"
+        ],
+        "answer": "Đỏ"
+    },
+    {
+        "question": "Phong tục nào dưới đây không phải là phong tục của ngày Tết ở Việt Nam?",
+        "options": [
+            "Xông đất",
+            "Mừng tuổi",
+            "Tổ chức tiệc nướng",
+            "Cúng ông Công, ông Táo"
+        ],
+        "answer": "Tổ chức tiệc nướng"
+    },
+    {
+        "question": "Ngày Tết, người Việt thường mừng tuổi bằng món gì?",
+        "options": [
+            "Tiền lì xì",
+            "Quà Tết",
+            "Bánh chưng",
+            "Mứt Tết"
+        ],
+        "answer": "Tiền lì xì"
+    },
+    {
+        "question": "Tết Nguyên Đán được bắt nguồn từ đất nước nào?",
+        "options": [
+            "Trung Quốc",
+            "Hàn Quốc",
+            "Việt Nam",
+            "Nhật Bản"
+        ],
+        "answer": "Trung Quốc"
+    },
+    {
+        "question": "Cây nào được xem là biểu tượng của Tết Nguyên Đán ở miền Nam Việt Nam?",
+        "options": [
+            "Cây đào",
+            "Cây mai",
+            "Cây quất",
+            "Cây tre"
+        ],
+        "answer": "Cây mai"
+    },
+    {
+        "question": "Ai là người đầu tiên được phép vào nhà trong ngày Tết để mang lại may mắn?",
+        "options": [
+            "Người giàu có",
+            "Người bạn thân",
+            "Người tuổi đẹp",
+            "Người điềm đạm, hiền lành"
+        ],
+        "answer": "Người điềm đạm, hiền lành"
+    },
+    {
+        "question": "Để cầu may mắn trong dịp Tết, người Việt thường ăn gì vào sáng mùng 1?",
+        "options": [
+            "Cháo lòng",
+            "Món ăn ngọt",
+            "Bánh chưng, bánh tét",
+            "Nước mía"
+        ],
+        "answer": "Bánh chưng, bánh tét"
+    },
+    {
+        "question": "Lễ hội nào được tổ chức trong dịp Tết ở Việt Nam, đặc biệt ở miền Bắc?",
+        "options": [
+            "Lễ hội chùa Hương",
+            "Lễ hội Đền Hùng",
+            "Lễ hội Tây Sơn",
+            "Lễ hội hoa mai"
+        ],
+        "answer": "Lễ hội chùa Hương"
+    },
+    {
+        "question": "Vật phẩm nào người Việt thường sử dụng để trang trí trong nhà dịp Tết?",
+        "options": [
+            "Lúa gạo",
+            "Hoa mai, hoa đào",
+            "Tranh ảnh",
+            "Cây cảnh"
+        ],
+        "answer": "Hoa mai, hoa đào"
+    },
+    {
+        "question": "Ngày Tết, người Việt thường mừng tuổi trẻ em bằng món quà gì?",
+        "options": [
+            "Tiền mừng tuổi",
+            "Đồ chơi",
+            "Quần áo mới",
+            "Bánh chưng"
+        ],
+        "answer": "Tiền mừng tuổi"
+    }
+]

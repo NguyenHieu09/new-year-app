@@ -9,6 +9,8 @@ import TetCompetitionScreen from '../screens/roundSecond/RoundSecond';
 import RoundSecondScreen from '../screens/roundSecond/RoundSecond';
 import ScrewScreen from '../screens/screw/Screw';
 import StartGameScreen from '../screens/startGame/StartGame';
+import QuestionScreen from '../screens/question/Question';
+import ResultScreen from '../screens/result/Result';
 
 const CompetitionStack = createStackNavigator();
 
@@ -23,6 +25,8 @@ const CompetitionStackNavigator = () => {
             <CompetitionStack.Screen name="RoundSecondScreen" component={RoundSecondScreen} />
             <CompetitionStack.Screen name="ScrewScreen" component={ScrewScreen} />
             <CompetitionStack.Screen name="StartGameScreen" component={StartGameScreen} />
+            <CompetitionStack.Screen name="QuestionScreen" component={QuestionScreen} />
+            <CompetitionStack.Screen name="ResultScreen" component={ResultScreen} />
 
         </CompetitionStack.Navigator>
     );

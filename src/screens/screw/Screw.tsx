@@ -179,6 +179,7 @@ const ScrewScreen = () => {
     const route = useRoute<RouteProp<RootStackParamList, 'ScrewScreen'>>();
     const { type } = route.params;
 
+
     // Lọc dữ liệu dựa trên type
     const currentData = data.find(item => item.type === type);
 

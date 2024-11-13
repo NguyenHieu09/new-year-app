@@ -1,9 +1,12 @@
+
+
 // import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // import { auth, firestore } from '../../config/firebaseConfig';
 // import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-// import { doc, setDoc } from 'firebase/firestore';
+// import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 // interface UserInfo {
+//     id: string;
 //     fullName: string | null;
 //     password: string;
 //     email: string | null;
@@ -27,7 +30,12 @@
 //         try {
 //             const userCredential = await signInWithEmailAndPassword(auth, email, password);
 //             const user = userCredential.user;
-//             return { email: user.email, fullName: user.fullName, password };
+
+//             // Fetch user fullName from Firestore
+//             const userDoc = await getDoc(doc(firestore, 'users', user.uid));
+//             const fullName = userDoc.exists() ? userDoc.data().fullName : null;
+
+//             return { email: user.email, fullName, password };
 //         } catch (error) {
 //             if (error instanceof Error) {
 //                 return thunkAPI.rejectWithValue(error.message);
@@ -98,12 +106,14 @@
 // export const { logout } = authSlice.actions;
 // export default authSlice.reducer;
 
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { auth, firestore } from '../../config/firebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 interface UserInfo {
+    id: string;
     fullName: string | null;
     password: string;
     email: string | null;
@@ -128,11 +138,12 @@ export const login = createAsyncThunk(
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // Fetch user fullName from Firestore
+            // Lấy fullName từ Firestore
             const userDoc = await getDoc(doc(firestore, 'users', user.uid));
             const fullName = userDoc.exists() ? userDoc.data().fullName : null;
 
-            return { email: user.email, fullName, password };
+            // Trả về user với id, email, fullName và password
+            return { id: user.uid, email: user.email, fullName, password };
         } catch (error) {
             if (error instanceof Error) {
                 return thunkAPI.rejectWithValue(error.message);
@@ -148,12 +159,16 @@ export const register = createAsyncThunk(
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
+
+            // Lưu user vào Firestore
             await setDoc(doc(firestore, 'users', user.uid), {
                 fullName,
                 email,
                 password
             });
-            return { fullName, email, password };
+
+            // Trả về user với id, email, fullName và password
+            return { id: user.uid, fullName, email, password };
         } catch (error) {
             if (error instanceof Error) {
                 return thunkAPI.rejectWithValue(error.message);
@@ -179,7 +194,7 @@ const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.user = action.payload;
+                state.user = action.payload; // user có chứa id, email, fullName, password
             })
             .addCase(login.rejected, (state, action) => {
                 state.status = 'failed';
@@ -191,7 +206,7 @@ const authSlice = createSlice({
             })
             .addCase(register.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.user = action.payload;
+                state.user = action.payload; // user có chứa id, email, fullName, password
             })
             .addCase(register.rejected, (state, action) => {
                 state.status = 'failed';

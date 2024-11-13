@@ -8,6 +8,7 @@ import CustomButton from '@/src/components/ui/CustomButton';
 import CustomText from '@/src/components/ui/CustomText';
 import { RootState } from '@/src/redux-toolkit/store';
 import { useSelector } from 'react-redux';
+import { findRandomOpponent } from '@/src/utils/findRandomOpponent ';
 
 const backgroundImage = require('../../../assets/image/dapNhanhLiXi.png');
 const centerImage = require('../../../assets/image/avatar.png');
@@ -18,15 +19,26 @@ const AnswerQuestionScreen = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const user = useSelector((state: RootState) => state.auth.user);
-    console.log('user', user);
+    const [opponent, setOpponent] = useState<any | null>(null);
     const [timer, setTimer] = useState(0);
+
 
     useEffect(() => {
         const interval = setInterval(() => {
             setTimer((prev) => prev + 1);
         }, 1000);
-        return () => clearInterval(interval);
-    }, []);
+
+        const timeout = setTimeout(() => {
+            navigation.navigate('StartGameScreen');
+        }, 10000); // 10 giây = 10000 milliseconds
+
+        // Đảm bảo clearTimeout chỉ được gọi khi component unmount
+        return () => {
+            clearInterval(interval);
+            clearTimeout(timeout);
+        };
+    }, [navigation]);
+
 
     // Format timer display as mm:ss
     const formatTime = (time: number) => {

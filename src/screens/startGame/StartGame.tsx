@@ -1,46 +1,43 @@
+
+
 import CustomButton from '@/src/components/ui/CustomButton';
 import { RootState } from '@/src/redux-toolkit/store';
 import { RootStackParamList } from '@/src/type/RootStackParamList';
-import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { findRandomOpponent } from '@/src/utils/findRandomOpponent ';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 
-// const backgroundImage1 = require('../../../assets/image/bannerVit.png');
-
 const backgroundImage = require('../../../assets/image/timDoiThu.png');
 const user = require('../../../assets/image/avatar.png');
 const otherUser = require('../../../assets/image/avatarOtherUser.png');
 
-const data = [{
-    banner: require('../../../assets/image/FrameTranhTai.png'),
-    title: 'THÁNH ÁNH KIM',
-    description: 'Khám phá ngôi nhà lấp lánh ngay nào! Chạm liên tục vào trần Ánh Kim, chạm càng nhanh điểm càng cao, bạn sẽ chiến thắng đối thủ!',
-    time: '12:00 - 13:00 | 18:00 - 20:00',
-    type: 'bắn vít'
-},
-{
-    banner: require('../../../assets/image/FrameTranhTai.png'),
-    title: 'THỬ TÀI BẮN VÍT',
-    description: 'Vận dụng tài bắn vít siêu đỉnh: chạm liên tục',
-    type: 'ánh kim'
-}
-]
-
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
-
 
 const StartGameScreen = () => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-    // const route = useRoute<RouteProp<RootStackParamList, 'ScrewScreen'>>();
-    // const { type } = route.params;
     const me = useSelector((state: RootState) => state.auth.user);
 
+    const [opponent, setOpponent] = useState<any | null>(null); // Đối thủ
     const [timer, setTimer] = useState(0);
+    const [error, setError] = useState<string | null>(null); // Thêm trạng thái lỗi
 
+    // Tìm đối thủ ngẫu nhiên
+    useEffect(() => {
+        if (me) {
+            findRandomOpponent(me.id)
+                .then(setOpponent)
+                .catch((err) => {
+                    setError(err.message); // Lưu thông báo lỗi vào state
+                    console.error(err); // In lỗi ra console
+                });
+        }
+    }, [me]);
 
+    // Đếm thời gian
     useEffect(() => {
         const interval = setInterval(() => {
             setTimer((prev) => prev + 1);
@@ -58,18 +55,17 @@ const StartGameScreen = () => {
     return (
         <SafeAreaView style={styles.safeArea}>
             <ImageBackground source={backgroundImage} style={[styles.backgroundContainer, { width: screenWidth, height: screenHeight }]} resizeMode="cover">
-
-
                 <Text style={styles.header}>TẾT TRANH TÀI</Text>
 
                 <View style={styles.text}>
                     <Text style={{
                         color: '#C4040B', fontSize: 18,
                         fontFamily: 'Signika-Bold',
-
                     }}>Đáp nhanh tranh lì xì</Text>
                     <Text style={{ textAlign: 'center' }}>Sẵn sàng thách đấu!</Text>
                 </View>
+
+                {/* Hiển thị thông tin người chơi */}
                 <View style={{ marginTop: 60, width: '70%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <View style={styles.user}>
                         <Image source={user} style={styles.image} />
@@ -81,15 +77,16 @@ const StartGameScreen = () => {
                         }}>{me?.fullName}</Text>
                     </View>
                     <View style={styles.user}>
-                        <Image source={otherUser} style={styles.image} />
+                        <Image source={opponent ? otherUser : user} style={styles.image} />
                         <Text style={{
                             color: '#f7eb4d', fontSize: 16, fontFamily: 'Signika-Bold', textShadowColor: '#1E0F00',
                             textShadowOffset: { width: 0.75, height: 0.75 },
                             textShadowRadius: 0.5,
                             textAlign: 'center',
-                        }}>Nguyễn Trần Ngọc Hân</Text>
+                        }}>{opponent ? opponent.fullName : (error ? error : 'Đang tìm đối thủ...')}</Text>
                     </View>
                 </View>
+
                 <Text style={{
                     marginTop: 50, color: '#f8e39a', fontSize: 22, fontFamily: 'Signika-Bold',
                     textAlign: 'center', marginBottom: 20
@@ -97,7 +94,7 @@ const StartGameScreen = () => {
 
                 <CustomButton
                     title="Chơi"
-                    onPress={() => navigation.navigate('EnvelopeScreen')}
+                    onPress={() => navigation.navigate('QuestionScreen')}
                     style={styles.button}
                 />
                 <CustomButton
@@ -106,22 +103,17 @@ const StartGameScreen = () => {
                     style={[styles.button]}
                     colors={['#ffffff', '#faecb6', '#faecb6',]}
                 />
-
             </ImageBackground>
-        </SafeAreaView >
-
-
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
-
     },
     backgroundContainer: {
         flex: 1,
-        // justifyContent: 'center',
         alignItems: 'center',
         bottom: -10,
     },
@@ -147,7 +139,6 @@ const styles = StyleSheet.create({
     },
     user: {
         width: 100,
-
         alignItems: 'center',
     },
     button: {

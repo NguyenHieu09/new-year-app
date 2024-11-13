@@ -13,4 +13,6 @@ export type RootStackParamList = {
     RoundSecondScreen: undefined;
     ScrewScreen: { type: string };
     StartGameScreen: undefined;
+    QuestionScreen: undefined;
+    ResultScreen: { score: number, totalQuestions: number };
 };
