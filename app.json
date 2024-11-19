@@ -30,7 +30,18 @@
       }
     },
     "plugins": [
-      "expo-font"
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/font/static/Signika-Light.ttf",
+            "./assets/font/static/Signika-Regular.ttf",
+            "./assets/font/static/Signika-Medium.ttf",
+            "./assets/font/static/Signika-SemiBold.ttf",
+            "./assets/font/static/Signika-Bold.ttf"
+          ]
+        }
+      ]
     ]
   }
 }

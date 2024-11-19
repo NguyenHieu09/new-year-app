@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: 'center',
         fontFamily: 'Signika-SemiBold',
+        marginTop: -5,
     },
 });
 

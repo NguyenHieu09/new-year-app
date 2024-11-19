@@ -11,6 +11,7 @@ import ScrewScreen from '../screens/screw/Screw';
 import StartGameScreen from '../screens/startGame/StartGame';
 import QuestionScreen from '../screens/question/Question';
 import ResultScreen from '../screens/result/Result';
+import GameBanVitScreen from '../screens/gameVit/GameBanVit';
 
 const CompetitionStack = createStackNavigator();
 
@@ -27,6 +28,8 @@ const CompetitionStackNavigator = () => {
             <CompetitionStack.Screen name="StartGameScreen" component={StartGameScreen} />
             <CompetitionStack.Screen name="QuestionScreen" component={QuestionScreen} />
             <CompetitionStack.Screen name="ResultScreen" component={ResultScreen} />
+
+            <CompetitionStack.Screen name="GameBanVitScreen" component={GameBanVitScreen} />
 
         </CompetitionStack.Navigator>
     );

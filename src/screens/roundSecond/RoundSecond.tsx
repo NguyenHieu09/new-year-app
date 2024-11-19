@@ -31,7 +31,7 @@ const RoundSecondScreen = () => {
                         <CustomButton
                             title="Anh hùng siêu bảo vệ"
                             subtitle="Ra mắt vào ngày 08/11"
-                            onPress={() => navigation.navigate('EnvelopeScreen')}
+                            onPress={() => navigation.navigate('ScrewScreen', { type: 'bắn vít' })}
                             style={styles.button}
                         />
                         <CustomButton
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'green',
         alignItems: 'center',
 
-        marginBottom: 40
+        marginBottom: 20
     },
     number: {
         fontSize: 18,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginTop: 10,
         width: 230,
-        height: 60,
+        height: 50,
         justifyContent: 'center',
     },
     buttonText: {

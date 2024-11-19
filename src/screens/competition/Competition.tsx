@@ -43,7 +43,7 @@ const CompetitionScreen = () => {
                                     PNJ 9.999</Text>
 
                             </View>
-                            <View style={{ position: 'absolute', top: 10, left: 155, justifyContent: 'center', alignItems: 'center' }}>
+                            <View style={{ position: 'absolute', top: 5, left: 140, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={{ marginBottom: 10, color: '#FFF2B0', fontFamily: 'Signika-Bold' }}>01 Giải Nhất</Text>
                                 <Image source={motChi} style={styles.motchi} />
                                 <Text style={{ fontSize: 12, paddingTop: 30, textAlign: 'center', color: '#fff', fontFamily: 'Signika-SemiBold' }}>MỘT CHỈ VÀNG {`\n`}
