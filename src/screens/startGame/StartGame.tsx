@@ -270,7 +270,7 @@ const StartGameScreen = () => {
                     onPress={() => {
                         if (screenInfo) {
                             // Ép kiểu screenInfo?.navigation là một trong các tên màn hình hợp lệ
-                            navigation.navigate(screenInfo.navigation as keyof RootStackParamList);
+                            navigation.navigate(screenInfo.navigation as keyof RootStackParamList, { opponent });
                         } else {
                             // Nếu không tìm thấy thông tin màn hình, có thể điều hướng đến một màn hình mặc định hoặc thông báo lỗi
                             console.error('Không tìm thấy màn hình tương ứng');
