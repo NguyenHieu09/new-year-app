@@ -58,7 +58,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 interface CustomButtonProps extends TouchableOpacityProps {
     title: string;
     subtitle?: string;
-    colors?: string[];
+    // colors?: string[];
+    colors?: [string, string, ...string[]];
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({ title, subtitle, colors = ['#fff700', '#ffcc00', '#ff9900'], style, ...props }) => {

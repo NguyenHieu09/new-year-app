@@ -1,5 +1,3 @@
-
-
 import { RootState } from '@/src/redux-toolkit/store';
 import { RootStackParamList } from '@/src/type/RootStackParamList';
 import { RouteProp, useRoute } from '@react-navigation/native';
@@ -9,11 +7,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 
 const backgroundImage = require('../../../assets/image/banVit.png');
-const centerImage = require('../../../assets/image/frameGameVit.png');
+const centerImage = require('../../../assets/image/tranNha.png');
 
-const dinh1 = require('../../../assets/image/dinh1.png');
-const dinh2 = require('../../../assets/image/dinh2.png');
-const dinh3 = require('../../../assets/image/dinh3.png');
+const tuyet = require('../../../assets/image/tuyet.png');
 
 const frameAvatar = require('../../../assets/image/frameAvatar.png');
 const frameAvatar1 = require('../../../assets/image/frameAvatar1.png');
@@ -22,20 +18,39 @@ const avatarOtherUser = require('../../../assets/image/face1.png');
 const vs = require('../../../assets/image/vs.png');
 const clock = require('../../../assets/image/clock.png');
 
-const mayKhoan = require('../../../assets/image/mayKhoan.png');
-const tuiDinh = require('../../../assets/image/tuiDinh.png');
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-const GameBanVitScreen = () => {
-    const [visibleImages, setVisibleImages] = useState([false, false, false]);
+const GameAnhKimScreen = () => {
+    const [visibleImages, setVisibleImages] = useState([true, true, true]);
     const [dinhCount, setDinhCount] = useState(0);
     const [dinhCountOtherUser, setDinhCountOtherUser] = useState(0); // Trạng thái điểm của người chơi kia
     const [timeLeft, setTimeLeft] = useState(60); // Thời gian bắt đầu là 60 giây
     const [gameOver, setGameOver] = useState(false);
-    const route = useRoute<RouteProp<RootStackParamList, 'GameBanVitScreen'>>();
+    const route = useRoute<RouteProp<RootStackParamList, 'GameAnhKimScreen'>>();
     const { opponent } = route.params;
     const me = useSelector((state: RootState) => state.auth.user);
+
+    const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
+
+    const [isPressing, setIsPressing] = useState(false); // Trạng thái nhấn
+
+    const handlePressIn = (event: any) => {
+        const { locationX, locationY } = event.nativeEvent;
+
+        if (timeLeft > 0) {
+            setPosition({ x: locationX, y: locationY }); // Lấy vị trí nhấn
+            setIsPressing(true); // Hiển thị ảnh
+            setDinhCount(prev => prev + 1); // Tăng số đinh
+        }
+
+    };
+
+    const handlePressOut = () => {
+        setIsPressing(false); // Ẩn ảnh khi nhả tay
+    };
+
+
     useEffect(() => {
         // Giảm thời gian mỗi giây
         if (timeLeft > 0) {
@@ -57,20 +72,6 @@ const GameBanVitScreen = () => {
         return `${minutes}:${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
     };
 
-    const handlePress = (index: number) => {
-        if (timeLeft > 0) {
-            setVisibleImages(prev => {
-                const updated = [false, false, false];
-                updated[index] = true;
-                return updated;
-            });
-            setDinhCount(prev => prev + 1);
-        }
-    };
-
-    const handlePressOut = () => {
-        setVisibleImages([false, false, false]);
-    };
 
     useEffect(() => {
         if (timeLeft % 1 === 0 && timeLeft !== 0) {
@@ -100,25 +101,31 @@ const GameBanVitScreen = () => {
                         </View>
                     </View>
 
-                    <Text style={{ fontFamily: 'Signika-Bold', fontSize: 18, marginBottom: 8, color: '#ffffff', }}>THỬ TÀI BẮN VÍT</Text>
+                    <Text style={{ fontFamily: 'Signika-Bold', fontSize: 18, marginBottom: 8, color: '#ffffff', }}>THÁNH ÁNH KIM</Text>
                     <ImageBackground source={centerImage} style={styles.frame} imageStyle={styles.frameImage}>
                         <ImageBackground source={clock} style={{ justifyContent: 'center', alignItems: 'center', width: 100, height: 50 }} imageStyle={styles.clock} >
                             <Text style={styles.time}>{formatTime(timeLeft)}</Text>
                         </ImageBackground>
                         <View style={styles.imageRow}>
-                            <TouchableOpacity activeOpacity={1} onPressIn={() => handlePress(0)} onPressOut={handlePressOut} style={[styles.touchable, { marginTop: 40 }]} >
-                                {visibleImages[0] && <Image source={dinh1} style={[styles.motchi, { width: 80, height: 80 }]} />}
-                            </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={1} onPressIn={() => handlePress(1)} onPressOut={handlePressOut} style={[styles.touchable, { position: 'absolute', top: -10, left: 155 }]} >
-                                {visibleImages[1] && <Image source={dinh2} style={[styles.motchi, { width: 80, height: 80 }]} />}
-                            </TouchableOpacity>
-                            <TouchableOpacity activeOpacity={1} onPressIn={() => handlePress(2)} onPressOut={handlePressOut} style={[styles.touchable, { marginTop: 40 }]} >
-                                {visibleImages[2] && <Image source={dinh3} style={[styles.motchi]} />}
+                            <TouchableOpacity
+                                activeOpacity={1}
+                                style={styles.touchable}
+                                onPressIn={handlePressIn}
+                                onPressOut={handlePressOut}>
+                                {isPressing && position && (
+                                    <Image
+                                        source={tuyet}
+                                        style={[
+                                            styles.motchi,
+                                            { left: position.x, top: position.y - 60 },
+                                        ]}
+                                    />
+                                )}
                             </TouchableOpacity>
                         </View>
                         <View style={styles.textContainer}>
-                            <Image source={mayKhoan} style={styles.image} />
-                            <Image source={tuiDinh} style={styles.tuiDinh} />
+                            {/* <Image source={mayKhoan} style={styles.image} />
+                            <Image source={tuiDinh} style={styles.tuiDinh} /> */}
                         </View>
                     </ImageBackground>
                 </View>
@@ -126,7 +133,6 @@ const GameBanVitScreen = () => {
         </SafeAreaView>
     );
 };
-
 
 const styles = StyleSheet.create({
     safeArea: {
@@ -153,58 +159,36 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     imageRow: {
-        flex: 1,
+        flex: 3,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
         width: '100%',
         paddingLeft: 40,
         paddingRight: 32,
+        // backgroundColor: 'blue',
     },
     textContainer: {
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-    },
-    frameText: {
-        color: '#fff',
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        padding: 20,
-    },
-    nuaChi: {
-        width: 50,
-        height: 50,
-        resizeMode: 'contain',
+
+
     },
     motchi: {
         width: 60,
         height: 60,
         resizeMode: 'contain',
+        position: 'absolute', // Đảm bảo hình ảnh được định vị chính xác
     },
-    header: {
-        fontSize: 15,
-        fontFamily: 'Signika-Bold',
-        marginTop: 15,
-        color: '#FFF2B0'
-    },
-    image: {
+    touchableArea: {
         width: 200,
         height: 200,
-        resizeMode: 'contain',
-        left: -20,
+        position: 'absolute',
+        backgroundColor: 'red',
     },
-    imageRound3: {
-        width: 100,
-        height: 80,
-        resizeMode: 'contain',
-    },
-    round: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+
     name: {
         color: '#FFFFFF',
         fontSize: 14,
@@ -237,13 +221,12 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     touchable: {
-        width: 100,
-        height: 100,
+        width: '100%',
+        height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: 90,
-        // backgroundColor: 'blue'
+
     },
 });
 
-export default GameBanVitScreen;
+export default GameAnhKimScreen;

@@ -12,6 +12,7 @@ import StartGameScreen from '../screens/startGame/StartGame';
 import QuestionScreen from '../screens/question/Question';
 import ResultScreen from '../screens/result/Result';
 import GameBanVitScreen from '../screens/gameVit/GameBanVit';
+import GameAnhKimScreen from '../screens/gameAnhKim/GameAnhKim';
 
 const CompetitionStack = createStackNavigator();
 
@@ -30,6 +31,8 @@ const CompetitionStackNavigator = () => {
             <CompetitionStack.Screen name="ResultScreen" component={ResultScreen} />
 
             <CompetitionStack.Screen name="GameBanVitScreen" component={GameBanVitScreen} />
+
+            <CompetitionStack.Screen name="GameAnhKimScreen" component={GameAnhKimScreen} />
 
         </CompetitionStack.Navigator>
     );

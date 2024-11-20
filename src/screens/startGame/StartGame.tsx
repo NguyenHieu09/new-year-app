@@ -185,7 +185,7 @@ const data = [
     { type: 'câu hỏi', navigation: 'QuestionScreen', textScreen: 'Đáp nhanh tranh lì xì' },
     { type: 'bắn vít', navigation: 'GameBanVitScreen', textScreen: 'Thử tài bắn vít' },
     { type: 'anh hùng', navigation: 'EnvelopeScreen', textScreen: 'Anh hùng siêu bảo vệ' },
-    { type: 'ánh kim', navigation: 'EnvelopeScreen', textScreen: 'Thánh ánh kim' },
+    { type: 'ánh kim', navigation: 'GameAnhKimScreen', textScreen: 'Thánh ánh kim' },
 ];
 
 const StartGameScreen = () => {
