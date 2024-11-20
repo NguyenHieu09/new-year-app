@@ -17,4 +17,5 @@ export type RootStackParamList = {
     ResultScreen: { score: number, totalQuestions: number };
     GameBanVitScreen: { opponent: any };
     GameAnhKimScreen: { opponent: any };
+    GameAnhHungScreen: { opponent: any };
 };

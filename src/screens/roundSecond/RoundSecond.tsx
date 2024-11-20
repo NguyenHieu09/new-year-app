@@ -31,7 +31,7 @@ const RoundSecondScreen = () => {
                         <CustomButton
                             title="Anh hùng siêu bảo vệ"
                             subtitle="Ra mắt vào ngày 08/11"
-                            onPress={() => navigation.navigate('ScrewScreen', { type: 'bắn vít' })}
+                            onPress={() => navigation.navigate('ScrewScreen', { type: 'anh hùng' })}
                             style={styles.button}
                         />
                         <CustomButton
