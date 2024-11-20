@@ -29,7 +29,7 @@ const AnswerQuestionScreen = () => {
         }, 1000);
 
         const timeout = setTimeout(() => {
-            navigation.navigate('StartGameScreen');
+            navigation.navigate('StartGameScreen', { type: "câu hỏi" });
         }, 10000); // 10 giây = 10000 milliseconds
 
         // Đảm bảo clearTimeout chỉ được gọi khi component unmount

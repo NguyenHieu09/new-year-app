@@ -13,7 +13,7 @@ export type RootStackParamList = {
     RoundSecondScreen: undefined;
     ScrewScreen: { type: string };
     StartGameScreen: { type: string };
-    QuestionScreen: undefined;
+    QuestionScreen: { opponent: any };
     ResultScreen: { score: number, totalQuestions: number };
     GameBanVitScreen: { opponent: any };
     GameAnhKimScreen: { opponent: any };

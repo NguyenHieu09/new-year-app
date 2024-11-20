@@ -234,7 +234,7 @@ const StartGameScreen = () => {
                 <Text style={styles.header}>TẾT TRANH TÀI</Text>
 
                 <View style={styles.text}>
-                    <Text style={styles.textScreen}>{screenInfo?.textScreen || 'Đáp nhanh tranh lì xì'}</Text>
+                    <Text style={styles.textScreen}>{screenInfo?.textScreen || ''}</Text>
                     <Text style={{ textAlign: 'center' }}>Sẵn sàng thách đấu!</Text>
                 </View>
 

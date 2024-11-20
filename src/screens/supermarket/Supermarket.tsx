@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@/src/components/ui/CustomButton';
 import CounterComponent from '@/src/components/Counter/Counter';
 import CustomText from '@/src/components/ui/CustomText';
+import { Alert } from 'react-native';
 
 const backgroundImage = require('../../../assets/image/doiLiXi.png');
 const voucher100Image = require('../../../assets/image/100k.png');
@@ -18,10 +19,33 @@ const footerCloudy = require('../../../assets/image/GroupCloudy.png');
 const frameImage = require('../../../assets/image/frameLixi.png');
 
 const SupermarketScreen = () => {
-    const [opacity, setOpacity] = useState(1);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [userLixi, setUserLixi] = useState(110); // Số lượng lì xì hiện có của người dùng
+    const [voucher50Count, setVoucher50Count] = useState(0); // Số lượng phiếu 50k muốn đổi
+    const [voucher100Count, setVoucher100Count] = useState(0); // Số lượng phiếu 100k muốn đổi
+
+    // const [selectedVoucher, setSelectedVoucher] = useState<string | null>(null); // Loại phiếu mua hàng được chọn
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
+    // const [opacity, setOpacity] = useState(1);
+    // const [modalVisible, setModalVisible] = useState(false);
+    // const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    const handleExchange = () => {
+        const requiredLixi = voucher50Count * 22 + voucher100Count * 44;
+        if (userLixi >= requiredLixi) {
+
+            setUserLixi(prev => prev - requiredLixi);
+            Alert.alert(
+                'Thành công',
+                `Bạn đã đổi thành công: 
+                - Phiếu 50k: ${voucher50Count} 
+                - Phiếu 100k: ${voucher100Count}`
+            );
+            setVoucher50Count(0);
+            setVoucher100Count(0);
+        } else {
+            Alert.alert('Lỗi', 'Bạn không đủ lì xì để đổi số lượng phiếu này.');
+        }
+    };
     return (
         <SafeAreaView style={styles.safeArea}>
             <ImageBackground source={backgroundImage} style={styles.background} resizeMode="cover">
@@ -39,7 +63,9 @@ const SupermarketScreen = () => {
                             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                                 <CustomText style={styles.text}>Phiếu mua hàng {`\n`} 100k</CustomText>
                                 <Text style={{ color: '#FFFFFF', marginBottom: 10 }}>Yêu cầu: 44 lì xì</Text>
-                                <CounterComponent />
+                                {/* <CounterComponent /> */}
+                                <CounterComponent count={voucher100Count} setCount={setVoucher100Count} />
+
                             </View>
                         </View>
                     </ImageBackground>
@@ -53,22 +79,30 @@ const SupermarketScreen = () => {
                             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                                 <CustomText style={styles.text}>Phiếu mua hàng {`\n`} 50k</CustomText>
                                 <Text style={{ color: '#FFFFFF', marginBottom: 10 }}>Yêu cầu: 22 lì xì</Text>
-                                <CounterComponent />
+                                {/* <CounterComponent /> */}
+                                <CounterComponent count={voucher50Count} setCount={setVoucher50Count} />
                             </View>
+
                         </View>
                     </ImageBackground>
 
                     <ImageBackground source={footerImage} style={styles.footer} imageStyle={styles.footerImage}>
-                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', zIndex: 1, }}>
                             <CustomText style={styles.number}>
                                 Bạn đang có{' '}
-                                <Text style={styles.highlightedNumber}>110</Text>
+                                <Text style={styles.highlightedNumber}>{userLixi}</Text>
                                 {' '}lì xì
                             </CustomText>
-                            <CustomButton title='Đổi ngay' style={styles.button} />
+
+                            <CustomButton title='Đổi ngay' style={styles.button} onPress={handleExchange} />
+
+
                         </View>
 
+
                         <Image source={footerCloudy} style={[styles.footerImage, styles.overlayImage]} />
+
                     </ImageBackground>
 
                 </View>
@@ -104,6 +138,7 @@ const styles = StyleSheet.create({
         // borderRadius: 20,
         // paddingHorizontal: 20
     },
+
     buttonText: {
         color: '#cc0000',
         fontSize: 22,
@@ -177,3 +212,5 @@ const styles = StyleSheet.create({
 });
 
 export default SupermarketScreen;
+
+
