@@ -38,10 +38,10 @@ const EnvelopeScreen = () => {
                         <View style={{ width: '90%', backgroundColor: '#b0050b', borderWidth: 2, borderColor: '#fff613', borderRadius: 10, bottom: 0, }}>
                             <Text style={styles.message}>
                                 Lưu ý: Người chơi chiến thắng sẽ nhận được{' '}
-                                <Text style={[styles.highlightedNumber, { fontWeight: '700' }]}> +1 li xì</Text>
+                                <Text style={[styles.highlightedNumber, { fontWeight: '700' }]}>+1 li xì</Text>
                                 {' '}
                                 . Mỗi người chơi chỉ nhận được{' '}
-                                <Text style={styles.highlightedNumber}> 1 lượt chơi 1 ngày.</Text>
+                                <Text style={styles.highlightedNumber}>1 lượt chơi 1 ngày.</Text>
                                 {' '}
 
                             </Text>

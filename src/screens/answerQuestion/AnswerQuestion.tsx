@@ -62,13 +62,16 @@ const AnswerQuestionScreen = () => {
                         <Image source={centerImage} style={styles.centerImage} />
                         <Text style={styles.avatar}>{user?.fullName}</Text>
                         <View>
-                            <Text style={[styles.avatar, { marginTop: 45, fontSize: 24 }]}>{formatTime(timer)}</Text>
+                            <Text style={[styles.avatar, { marginTop: 15, fontSize: 24 }]}>{formatTime(timer)}</Text>
                         </View>
                     </View>
 
 
                     <View style={styles.tooltip}>
-                        <Text style={styles.buttonText}>Lưu ý: Người chơi trả lời đúng và nhanh hơn sẽ chiến thắng và nhận được +11 xì</Text>
+                        <Text style={styles.buttonText}>Lưu ý: Người chơi trả lời đúng và nhanh hơn sẽ chiến thắng và nhận được
+                            {' '}
+                            <Text style={{ fontWeight: '700', color: '#C2030B' }}>+1 li xì</Text>
+                        </Text>
                     </View>
 
                 </View>
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'green',
     },
     tooltip: {
-        width: '90%',
+        width: '95%',
         backgroundColor: '#feeda5',
         alignItems: 'center',
         padding: 10,
@@ -124,7 +127,7 @@ const styles = StyleSheet.create({
         // textAlign: 'center',
     },
     centerImage: {
-        width: 190,
+        width: 160,
         height: undefined,
         aspectRatio: 1,
         resizeMode: 'contain',
@@ -135,6 +138,8 @@ const styles = StyleSheet.create({
         color: '#fff2b1',
         fontSize: 20,
         fontFamily: 'Signika-Bold',
+        marginBottom: 15
+
     }
 });
 

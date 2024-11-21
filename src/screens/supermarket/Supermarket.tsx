@@ -88,7 +88,7 @@ const SupermarketScreen = () => {
 
                     <ImageBackground source={footerImage} style={styles.footer} imageStyle={styles.footerImage}>
 
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', zIndex: 1, }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', zIndex: 1, }}>
                             <CustomText style={styles.number}>
                                 Bạn đang có{' '}
                                 <Text style={styles.highlightedNumber}>{userLixi}</Text>
