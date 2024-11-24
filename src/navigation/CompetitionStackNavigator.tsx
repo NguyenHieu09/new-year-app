@@ -14,6 +14,8 @@ import ResultScreen from '../screens/result/Result';
 import GameBanVitScreen from '../screens/gameVit/GameBanVit';
 import GameAnhKimScreen from '../screens/gameAnhKim/GameAnhKim';
 import GameAnhHungScreen from '../screens/gameAnhHung/GameAnhHung';
+import ScoreScreen from '../screens/result/Score';
+import FinalScreen from '../screens/final/Final';
 
 const CompetitionStack = createStackNavigator();
 
@@ -35,6 +37,10 @@ const CompetitionStackNavigator = () => {
             <CompetitionStack.Screen name="GameAnhHungScreen" component={GameAnhHungScreen} />
 
             <CompetitionStack.Screen name="GameAnhKimScreen" component={GameAnhKimScreen} />
+            <CompetitionStack.Screen name="ScoreScreen" component={ScoreScreen} />
+            <CompetitionStack.Screen name="FinalScreen" component={FinalScreen} />
+
+
 
         </CompetitionStack.Navigator>
     );

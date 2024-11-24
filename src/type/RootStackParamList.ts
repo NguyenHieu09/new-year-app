@@ -18,4 +18,6 @@ export type RootStackParamList = {
     GameBanVitScreen: { opponent: any };
     GameAnhKimScreen: { opponent: any };
     GameAnhHungScreen: { opponent: any };
+    ScoreScreen: { score1: number, score2: number };
+    FinalScreen: undefined;
 };

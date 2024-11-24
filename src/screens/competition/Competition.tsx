@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image, Dimen
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { RootStackParamList } from '@/src/type/RootStackParamList';
-import AttendanceModal from '@/src/components/modal/attendance';
+import AttendanceModal from '@/src/components/modal/Attendance';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@/src/components/ui/CustomButton';
 
@@ -58,9 +58,9 @@ const CompetitionScreen = () => {
                             </View>
                         </View>
                         <View style={styles.textContainer}>
-                            <TouchableOpacity style={[styles.round, { position: 'absolute', top: 20, right: 60 }]}>
+                            <TouchableOpacity style={[styles.round, { position: 'absolute', top: 20, right: 60 }]} onPress={() => navigation.navigate('FinalScreen')}>
                                 <Image source={chungket} style={styles.imageRound3} />
-                                <Text style={{ textAlign: 'center', color: '#FFE933', fontFamily: 'Signika-SemiBold' }}>15-12-2021</Text>
+                                <Text style={{ textAlign: 'center', color: '#FFE933', fontFamily: 'Signika-SemiBold' }} >15-12-2021</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[styles.round, { position: 'absolute', left: 65 }]} onPress={() => navigation.navigate('RoundSecondScreen')}>
                                 <Image source={vong2} style={styles.image} />

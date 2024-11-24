@@ -2,7 +2,7 @@
 
 import { RootState } from '@/src/redux-toolkit/store';
 import { RootStackParamList } from '@/src/type/RootStackParamList';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image, Dimensions, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -36,6 +36,8 @@ const GameBanVitScreen = () => {
     const route = useRoute<RouteProp<RootStackParamList, 'GameBanVitScreen'>>();
     const { opponent } = route.params;
     const me = useSelector((state: RootState) => state.auth.user);
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
     useEffect(() => {
         // Giảm thời gian mỗi giây
         if (timeLeft > 0) {
@@ -47,7 +49,12 @@ const GameBanVitScreen = () => {
             return () => clearInterval(timer);
         } else {
             setGameOver(true);
-            Alert.alert('Kết quả', `Số đinh của bạn: ${dinhCount}\nSố đinh của đối thủ: ${dinhCountOtherUser}`);
+            navigation.navigate('ScoreScreen', {
+                score1: dinhCount,
+                score2: dinhCountOtherUser,
+            });
+
+            // Alert.alert('Kết quả', `Số đinh của bạn: ${dinhCount}\nSố đinh của đối thủ: ${dinhCountOtherUser}`);
         }
     }, [timeLeft]);
 

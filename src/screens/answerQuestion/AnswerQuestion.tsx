@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, Dimensions } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '@/src/type/RootStackParamList';
-import AttendanceModal from '@/src/components/modal/attendance';
+import AttendanceModal from '@/src/components/modal/Attendance';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@/src/components/ui/CustomButton';
 import CustomText from '@/src/components/ui/CustomText';

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { RootStackParamList } from '@/src/type/RootStackParamList';
-import AttendanceModal from '@/src/components/modal/attendance';
+import AttendanceModal from '@/src/components/modal/Attendance';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@/src/components/ui/CustomButton';
 
