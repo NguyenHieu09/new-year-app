@@ -1,92 +1,8 @@
 
 
-// import React, { useState } from 'react';
-// import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image, Dimensions } from 'react-native';
-// import { useNavigation, NavigationProp } from '@react-navigation/native';
-// import { LinearGradient } from 'expo-linear-gradient';
-// import { RootStackParamList } from '@/src/type/RootStackParamList';
-// import AttendanceModal from '@/src/components/modal/Attendance';
-// import { SafeAreaView } from 'react-native-safe-area-context';
-// import CustomButton from '@/src/components/ui/CustomButton';
-// import TabCK from '@/src/components/tabCK/TabCK';
-
-// const backgroundImage = require('../../../assets/image/BXH.png');
-// const centerImage = require('../../../assets/image/frameCK.png');
-
-// const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
-
-// const FinalScreen = () => {
-//     const [opacity, setOpacity] = useState(1);
-//     const [modalVisible, setModalVisible] = useState(false);
-//     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-
-
-
-//     // Hàm xử lý các sự kiện nhấn nút trong TabCK
-//     const handleProvincePress = () => {
-//         console.log('Tỉnh');
-//     };
-
-//     const handleNationwidePress = () => {
-//         console.log('Toàn quốc');
-//     };
-
-//     const handleFinalPress = () => {
-//         console.log('Chung kết');
-//     };
-
-//     return (
-//         <SafeAreaView style={styles.safeArea}>
-//             <ImageBackground source={backgroundImage} style={[styles.background, { width: screenWidth, height: screenHeight }]} resizeMode="cover">
-//                 <View style={styles.container}>
-//                     <Text style={{ fontFamily: 'Signika-Bold', fontSize: 24, marginTop: 10, color: '#fee892' }}>ĐẠI HỘI TRANH TÀI</Text>
-//                     <ImageBackground source={centerImage} style={styles.frame} imageStyle={styles.frameImage}>
-//                         <TabCK
-
-//                             onProvincePress={handleProvincePress}
-//                             onNationwidePress={handleNationwidePress}
-//                             onFinalPress={handleFinalPress}
-//                         />
-
-//                     </ImageBackground>
-//                 </View>
-//             </ImageBackground >
-//         </SafeAreaView >
-//     );
-// };
-
-// const styles = StyleSheet.create({
-//     safeArea: {
-//         flex: 1,
-//     },
-//     background: {
-//         flex: 1,
-//     },
-//     container: {
-//         flex: 1,
-//         // justifyContent: 'center',
-//         alignItems: 'center',
-//     },
-//     frame: {
-//         marginTop: 50,
-//         width: '100%',
-//         height: '82%',
-//         // justifyContent: 'center',
-//         alignItems: 'center',
-
-//     },
-//     frameImage: {
-//         width: '100%',
-//         height: '100%',
-//         resizeMode: 'contain',
-//     },
-
-// });
-
-// export default FinalScreen;
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Dimensions, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TabCK from '@/src/components/tabCK/TabCK';
 
@@ -100,21 +16,165 @@ const face2 = require('../../../assets/image/face2.png');
 const xepHang1 = require('../../../assets/image/xep1.png');
 const xepHang2 = require('../../../assets/image/xep2.png');
 const xepHang = require('../../../assets/image/xephang.png');
+const hangCuaToi = require('../../../assets/image/cuaToi.png');
 
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
+type RankDataKey = 'Tỉnh' | 'Toàn quốc' | 'Chung kết';
+
+const rankData: Record<RankDataKey, { xepHang: number; thanhVien: string; liXi: number }[]> = {
+    "Tỉnh": [
+        {
+            xepHang: 1,
+            thanhVien: "Nguyễn Hoàng Đăng Khoa",
+            liXi: 999
+        },
+        {
+            xepHang: 2,
+            thanhVien: "Nguyễn Thị Khánh Linh",
+            liXi: 80
+        },
+        {
+            "xepHang": 3,
+            "thanhVien": "Phạm Văn Nam",
+            "liXi": 65
+        },
+        {
+            "xepHang": 4,
+            "thanhVien": "Trần Minh Phú",
+            "liXi": 54
+        },
+        {
+            "xepHang": 5,
+            "thanhVien": "Lê Thị Thu Hằng",
+            "liXi": 30
+        },
+        // {
+        //     xepHang: 6,
+        //     thanhVien: "Nguyễn Thị Trung Hiếu",
+        //     liXi: 12
+        // }
+    ],
+    "Toàn quốc": [
+        {
+            xepHang: 1,
+            thanhVien: "Nguyễn Hoàng Đăng Khoa",
+            liXi: 999
+        },
+        {
+            xepHang: 2,
+            thanhVien: "Nguyễn Thị Khánh Linh",
+            liXi: 80
+        },
+        {
+            xepHang: 3,
+            thanhVien: "Lê Thị Quỳnh Trâm",
+            liXi: 72
+        },
+        {
+            xepHang: 4,
+            thanhVien: "Đoàn Phước Đức",
+            liXi: 68
+        },
+        {
+            xepHang: 5,
+            thanhVien: "Đinh Quang Trung",
+            liXi: 46
+        },
+        // {
+        //     xepHang: 6,
+        //     thanhVien: "Nguyễn Thị Trung Hiếu",
+        //     liXi: 12
+        // }
+    ],
+    "Chung kết": [
+        {
+            xepHang: 1,
+            thanhVien: "Nguyễn Hoàng Đăng Khoa",
+            liXi: 999
+        },
+        {
+            xepHang: 2,
+            thanhVien: "Nguyễn Thị Khánh Linh",
+            liXi: 80
+        },
+        {
+            xepHang: 3,
+            thanhVien: "Lê Thị Quỳnh Trâm",
+            liXi: 72
+        },
+        {
+            "xepHang": 4,
+            "thanhVien": "Phạm Thị Thảo My",
+            "liXi": 65
+        },
+        {
+            "xepHang": 5,
+            "thanhVien": "Trần Công Minh",
+            "liXi": 50
+        },
+        // {
+        //     xepHang: 6,
+        //     thanhVien: "Nguyễn Thị Trung Hiếu",
+        //     liXi: 12
+        // }
+    ]
+}
+
 const FinalScreen = () => {
+    const [selectedTab, setSelectedTab] = useState<RankDataKey>('Tỉnh'); // Tab được chọn
+
     const handleProvincePress = () => {
-        console.log('Tỉnh');
+        setSelectedTab('Tỉnh');
     };
 
     const handleNationwidePress = () => {
-        console.log('Toàn quốc');
+        setSelectedTab('Toàn quốc');
     };
 
     const handleFinalPress = () => {
-        console.log('Chung kết');
+        setSelectedTab('Chung kết');
+    };
+
+    const renderRankData = () => {
+        return rankData[selectedTab].map((item, index) => {
+            if (item.xepHang === 1) {
+                return (
+                    <ImageBackground key={index} source={xepHang1} style={[styles.rank1]} imageStyle={styles.rank1Image}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                            <ImageBackground source={face2} style={[styles.avatar, { left: 20 }]} />
+                            <Text style={[styles.rankText, { color: '#FFE933', }]}>{item.thanhVien}</Text>
+                            <Text style={{ color: 'white', fontFamily: 'Signika-Bold' }}>{item.liXi}</Text>
+                            <Text style={{ color: 'white', fontFamily: 'Signika-Bold', marginHorizontal: 9 }}>Lì xì</Text>
+                        </View>
+                    </ImageBackground>
+                );
+            } else if (item.xepHang === 2) {
+                return (
+                    <ImageBackground key={index} source={xepHang2} style={[styles.rank1]} imageStyle={styles.rank1Image}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                            <ImageBackground source={face2} style={[styles.avatar, {}]} />
+                            <Text style={[styles.rankText, { color: '#FFE933', left: -10 }]}>{item.thanhVien}</Text>
+                            <Text style={{ color: 'white', fontFamily: 'Signika-Bold' }}>{item.liXi}</Text>
+                            <Text style={{ color: 'white', fontFamily: 'Signika-Bold', marginHorizontal: 9 }}>Lì xì</Text>
+                        </View>
+                    </ImageBackground>
+                );
+            } else {
+                return (
+                    <ImageBackground key={index} source={xepHang} style={[styles.rank1]} imageStyle={styles.rank1Image}>
+                        <View style={styles.rankContainer}>
+                            <Text style={styles.rankNumber}>{item.xepHang}</Text>
+                            <ImageBackground source={face2} style={[styles.avatar, { left: 16 }]} />
+                            <Text style={[styles.rankText, { color: '#FFE933' }]}>{item.thanhVien}</Text>
+                            <Text style={{ color: 'white', fontFamily: 'Signika-Bold', right: -15 }}>{item.liXi}</Text>
+                            <Text style={{ color: 'white', fontFamily: 'Signika-Bold', marginHorizontal: 11 }}>Lì xì</Text>
+                        </View>
+                    </ImageBackground>
+                );
+            }
+        });
     };
 
     return (
@@ -133,85 +193,52 @@ const FinalScreen = () => {
                     >
                         <View style={styles.rankRow}>
                             {/* Hạng 1 */}
-                            <ImageBackground source={hang1} style={styles.rankBox} imageStyle={styles.rankImage}>
-                                <ImageBackground source={face1} style={styles.faceImage} />
-                                <Text style={styles.rankText}>Nguyễn Hoàng
-                                    Đăng Khoa</Text>
-                            </ImageBackground>
+                            {rankData[selectedTab][0] && (
+                                <ImageBackground source={hang1} style={styles.rankBox} imageStyle={styles.rankImage}>
+                                    <ImageBackground source={face1} style={styles.faceImage} />
+                                    <Text style={[styles.rankText, { width: 100, }]}>{rankData[selectedTab][0].thanhVien}</Text>
+                                </ImageBackground>
+                                // <ImageBackground source={hang1} style={styles.rankBox} imageStyle={styles.rankImage}>
+                                //     <ImageBackground source={face1} style={styles.faceImage} />
+                                //     <Text style={styles.rankText}>{rankData[selectedTab][0].thanhVien}</Text>
+                                // </ImageBackground>
+                            )}
 
                             {/* Hạng 2 */}
-                            <ImageBackground source={hang2} style={[styles.rankBox,]} imageStyle={[styles.rankImage, { marginTop: 10 }]}>
-                                <ImageBackground source={face2} style={[styles.faceImage,]} />
-                                <Text style={[styles.rankText, { color: '#333333' }]}>Nguyễn Thị{'\n'}Khánh Linh</Text>
+                            {rankData[selectedTab][1] && (
+                                <ImageBackground source={hang2} style={[styles.rankBox,]} imageStyle={[styles.rankImage, { marginTop: 10 }]}>
+                                    <ImageBackground source={face2} style={[styles.faceImage,]} />
+                                    <Text style={[styles.rankText, { color: '#333333', width: 100, }]}>{rankData[selectedTab][1].thanhVien}</Text>
 
-                            </ImageBackground>
+                                </ImageBackground>
+                            )}
                         </View>
 
-                        <ImageBackground source={xepHang1} style={[styles.rank1]} imageStyle={styles.rank1Image}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                <ImageBackground source={face2} style={[styles.avatar]} />
-                                <Text style={[styles.rankText, { color: '#FFE933' }]}>Nguyễn Thị Khánh Linh</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold' }}>999</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold', marginHorizontal: 11 }}>Lì xì</Text>
-                            </View>
+                        {renderRankData()}
 
+                        <ImageBackground source={xepHang} style={[styles.rank1, { bottom: 10, position: 'absolute' }]} imageStyle={styles.rank1Image}>
+                            <Image source={hangCuaToi} style={styles.hangCuaToi} />
+
+                            <View style={styles.rankContainer}>
+                                <Text style={styles.rankNumber}>11</Text>
+                                <ImageBackground source={face2} style={[styles.avatar, { left: 18 }]} />
+                                <Text style={[styles.rankText, { color: '#FFE933', right: 6 }]}>Nguyễn Thị Trung Hiếu</Text>
+                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold', right: 5 }}>20</Text>
+                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold', right: 6 }}>Lì xì</Text>
+                            </View>
                         </ImageBackground>
 
-                        <ImageBackground source={xepHang2} style={[styles.rank1]} imageStyle={styles.rank1Image}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                        {/* <ImageBackground source={xepHang} style={[styles.rank1, { bottom: 10, position: 'absolute' }]} imageStyle={styles.rank1Image}>
+                            <Image source={hangCuaToi} style={{ width: 100, height: 20, resizeMode: 'contain' }} />
+
+                            <View style={styles.rankContainer}>
+                                <Text style={styles.rankNumber}>11</Text>
                                 <ImageBackground source={face2} style={[styles.avatar]} />
-                                <Text style={[styles.rankText, { color: '#FFE933' }]}>Nguyễn Thị Khánh Linh</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold' }}>999</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold', marginHorizontal: 11 }}>Lì xì</Text>
+                                <Text style={[styles.rankText, { color: '#FFE933', right: 6 }]}>Nguyễn Thị Trung Hiếu</Text>
+                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold', right: 5 }}>20</Text>
+                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold', right: 6 }}>Lì xì</Text>
                             </View>
-
-                        </ImageBackground>
-
-                        <ImageBackground source={xepHang} style={[styles.rank1]} imageStyle={styles.rank1Image}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ marginHorizontal: 25, fontSize: 18, color: 'white', fontFamily: 'Signika-Bold' }}>3</Text>
-                                <ImageBackground source={face2} style={[styles.avatar]} />
-                                <Text style={[styles.rankText, { color: '#FFE933' }]}>Nguyễn Thị Khánh Linh</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold' }}>999</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold', marginHorizontal: 11 }}>Lì xì</Text>
-                            </View>
-
-                        </ImageBackground>
-
-                        <ImageBackground source={xepHang} style={[styles.rank1]} imageStyle={styles.rank1Image}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ marginHorizontal: 25, fontSize: 18, color: 'white', fontFamily: 'Signika-Bold' }}>4</Text>
-
-                                <ImageBackground source={face2} style={[styles.avatar]} />
-
-                                <Text style={[styles.rankText, { color: '#FFE933' }]}>Nguyễn Thị Khánh Linh</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold' }}>999</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold', marginHorizontal: 11 }}>Lì xì</Text>
-                            </View>
-
-                        </ImageBackground>
-                        <ImageBackground source={xepHang} style={[styles.rank1]} imageStyle={styles.rank1Image}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ marginHorizontal: 25, fontSize: 18, color: 'white', fontFamily: 'Signika-Bold' }}>5</Text>
-
-                                <ImageBackground source={face2} style={[styles.avatar]} />
-                                <Text style={[styles.rankText, { color: '#FFE933' }]}>Nguyễn Thị Khánh Linh</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold' }}>999</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold', marginHorizontal: 11 }}>Lì xì</Text>
-                            </View>
-
-                        </ImageBackground>
-                        <ImageBackground source={xepHang} style={[styles.rank1]} imageStyle={styles.rank1Image}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ marginHorizontal: 25, fontSize: 18, color: 'white', fontFamily: 'Signika-Bold' }}>48</Text>
-
-                                <ImageBackground source={face2} style={[styles.avatar]} />
-                                <Text style={[styles.rankText, { color: '#FFE933' }]}>Nguyễn Thị Khánh Linh</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold' }}>999</Text>
-                                <Text style={{ color: 'white', fontFamily: 'Signika-Bold', marginHorizontal: 11 }}>Lì xì</Text>
-                            </View>
-
-                        </ImageBackground>
+                        </ImageBackground> */}
 
                     </ImageBackground>
 
@@ -289,9 +316,11 @@ const styles = StyleSheet.create({
         height: 50,
         marginBottom: 8, // Khoảng cách giữa ảnh face và text
         resizeMode: 'contain', // Đảm bảo ảnh vừa với khung
+
     },
     rankText: {
-        paddingHorizontal: 10,
+
+        paddingHorizontal: 5,
         fontFamily: 'Signika-Bold', // Font chữ
         fontSize: 12, // Kích thước chữ
         color: '#ffffff', // Màu chữ
@@ -306,6 +335,7 @@ const styles = StyleSheet.create({
     rank1: {
         alignItems: 'flex-end',
         justifyContent: 'center',
+
         // backgroundColor: 'blue',
         width: 290,
         height: 50,
@@ -314,9 +344,39 @@ const styles = StyleSheet.create({
     avatar: {
         width: 20,
         height: 20,
-        resizeMode: 'contain'
-    }
-
+        resizeMode: 'contain',
+        marginRight: 18,
+    },
+    rankContainer: {
+        width: 290,
+        flexDirection: 'row', // Hiển thị các thành phần cùng hàng
+        alignItems: 'center', // Căn giữa theo trục dọc
+        justifyContent: 'space-between', // Căn giữa các thành phần
+    },
+    rankNumber: {
+        fontSize: 18,
+        color: 'white',
+        fontFamily: 'Signika-Bold',
+        width: 30, // Cố định không gian cho thứ hạng
+        textAlign: 'left', // Văn bản căn lề trái
+        left: 30
+    },
+    liXiText: {
+        fontSize: 18,
+        color: 'white',
+        fontFamily: 'Signika-Bold',
+        marginHorizontal: 11,
+        textAlign: 'right', // Văn bản căn lề phải
+    },
+    hangCuaToi: {
+        position: 'absolute',
+        bottom: 35, // Đẩy ảnh xuống dưới để một nửa nằm ngoài
+        left: '50%', // Căn giữa theo chiều ngang
+        transform: [{ translateX: -50 }], // Căn giữa theo chiều ngang
+        width: 100,
+        height: 20,
+        resizeMode: 'contain',
+    },
 });
 
 export default FinalScreen;

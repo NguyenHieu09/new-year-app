@@ -2,7 +2,7 @@ import CustomButton from '@/src/components/ui/CustomButton';
 import { RootState } from '@/src/redux-toolkit/store';
 import { RootStackParamList } from '@/src/type/RootStackParamList';
 import { findRandomOpponent } from '@/src/utils/findRandomOpponent ';
-import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, Dimensions } from 'react-native';
@@ -32,17 +32,24 @@ const StartGameScreen = () => {
     const [timer, setTimer] = useState(0);
     const [error, setError] = useState<string | null>(null); // Thêm trạng thái lỗi
 
-    // Tìm đối thủ ngẫu nhiên
-    useEffect(() => {
-        if (me) {
-            findRandomOpponent(me.id)
-                .then(setOpponent)
-                .catch((err) => {
-                    setError(err.message); // Lưu thông báo lỗi vào state
-                    console.error(err); // In lỗi ra console
-                });
-        }
-    }, [me]);
+    useFocusEffect(
+        React.useCallback(() => {
+            setTimer(0); // Reset timer
+            setOpponent(null); // Reset đối thủ
+            setError(null); // Xóa lỗi
+            if (me) {
+                findRandomOpponent(me.id)
+                    .then(setOpponent)
+                    .catch((err) => {
+                        setError(err.message);
+                        console.error(err);
+                    });
+            }
+            return () => {
+                // Cleanup nếu cần
+            };
+        }, [me])
+    );
 
     // Đếm thời gian
     useEffect(() => {
@@ -51,6 +58,7 @@ const StartGameScreen = () => {
         }, 1000);
         return () => clearInterval(interval);
     }, []);
+
 
     // Format timer display as mm:ss
     const formatTime = (time: number) => {

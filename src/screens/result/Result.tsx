@@ -17,6 +17,8 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 const ResultScreen = () => {
     const route = useRoute<RouteProp<RootStackParamList, 'ResultScreen'>>();
     const { score, totalQuestions } = route.params;
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
 
     return (
         <SafeAreaView style={styles.safeArea}>
@@ -47,6 +49,7 @@ const ResultScreen = () => {
                             <CustomButton
                                 title="Nhận lộc"
                                 style={[styles.button]}
+                                onPress={() => navigation.navigate('RoundSecondScreen')}
                             />
                         </View>
                     </View>

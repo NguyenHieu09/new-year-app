@@ -25,7 +25,7 @@ const GameAnhKimScreen = () => {
     const [visibleImages, setVisibleImages] = useState([true, true, true]);
     const [dinhCount, setDinhCount] = useState(0);
     const [dinhCountOtherUser, setDinhCountOtherUser] = useState(0); // Trạng thái điểm của người chơi kia
-    const [timeLeft, setTimeLeft] = useState(60); // Thời gian bắt đầu là 60 giây
+    const [timeLeft, setTimeLeft] = useState(10); // Thời gian bắt đầu là 60 giây
     const [gameOver, setGameOver] = useState(false);
     const route = useRoute<RouteProp<RootStackParamList, 'GameAnhKimScreen'>>();
     const { opponent } = route.params;

@@ -31,7 +31,7 @@ const GameBanVitScreen = () => {
     const [visibleImages, setVisibleImages] = useState([false, false, false]);
     const [dinhCount, setDinhCount] = useState(0);
     const [dinhCountOtherUser, setDinhCountOtherUser] = useState(0); // Trạng thái điểm của người chơi kia
-    const [timeLeft, setTimeLeft] = useState(60); // Thời gian bắt đầu là 60 giây
+    const [timeLeft, setTimeLeft] = useState(10); // Thời gian bắt đầu là 60 giây
     const [gameOver, setGameOver] = useState(false);
     const route = useRoute<RouteProp<RootStackParamList, 'GameBanVitScreen'>>();
     const { opponent } = route.params;

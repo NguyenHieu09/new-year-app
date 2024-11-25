@@ -1,6 +1,6 @@
 import { RootState } from '@/src/redux-toolkit/store';
 import { RootStackParamList } from '@/src/type/RootStackParamList';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image, Dimensions, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -26,11 +26,13 @@ const GameAnhHungScreen = () => {
     const [visibleImages, setVisibleImages] = useState([true, true, true]);
     const [dinhCount, setDinhCount] = useState(0);
     const [dinhCountOtherUser, setDinhCountOtherUser] = useState(0); // Trạng thái điểm của người chơi kia
-    const [timeLeft, setTimeLeft] = useState(60); // Thời gian bắt đầu là 60 giây
+    const [timeLeft, setTimeLeft] = useState(10); // Thời gian bắt đầu là 60 giây
     const [gameOver, setGameOver] = useState(false);
     const route = useRoute<RouteProp<RootStackParamList, 'GameAnhHungScreen'>>();
     const { opponent } = route.params;
     const me = useSelector((state: RootState) => state.auth.user);
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
 
     const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
 
@@ -63,7 +65,11 @@ const GameAnhHungScreen = () => {
             return () => clearInterval(timer);
         } else {
             setGameOver(true);
-            Alert.alert('Kết quả', `Số đinh của bạn: ${dinhCount}\nSố đinh của đối thủ: ${dinhCountOtherUser}`);
+            navigation.navigate('ScoreScreen', {
+                score1: dinhCount,
+                score2: dinhCountOtherUser,
+            });
+            // Alert.alert('Kết quả', `Số đinh của bạn: ${dinhCount}\nSố đinh của đối thủ: ${dinhCountOtherUser}`);
         }
     }, [timeLeft]);
 
